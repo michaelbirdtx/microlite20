@@ -1,0 +1,19 @@
+"id","name","type","cost","ac_bonus"
+1,"Padded","L","2gp",1
+2,"Leather","L","10gp",2
+3,"Studded Leather","L","25gp",3
+4,"Chain Shirt","L","100gp",4
+5,"Hide","M","15gp",3
+6,"Scale Mail","M","50gp",4
+7,"Chainmail","M","150gp",5
+8,"Breastplate","M","200gp",6
+9,"Splint Mail","H","200gp",5
+10,"Banded Mail","H","250gp",6
+11,"Half Plate","H","600gp",7
+12,"Full Plate","H","1500gp",8
+13,"Buckler","S","15gp",1
+14,"Shield, Light Wooden","S","3gp",1
+15,"Shield, Light Steel","S","9gp",1
+16,"Shield, Heavy Wooden","S","7gp",2
+17,"Shield, Heavy Steel","S","20gp",2
+18,"Shield, Tower","S","30gp",4
