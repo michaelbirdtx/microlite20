@@ -47,3 +47,49 @@ class CharacterAdmin(admin.ModelAdmin):
     list_display = ('name', 'race', 'character_class')
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ['name']
+
+    fieldsets = [
+        (
+            'CHARACTER DEFINITION', {
+                'fields': [
+                    'name',
+                    ('race', 'character_class'),
+                    ('level', 'xp'),
+                    ('armor_class', 'hit_points'),
+                    'slug',
+                    'notes'
+                ]
+            }
+        ),
+        (
+            'STATS', {
+                'fields': [
+                    ('str', 'dex', 'mind')
+                ]
+            }
+        ),
+        (
+            'SKILLS', {
+                'fields': [
+                    ('phys', 'sub', 'know', 'com')
+                ]
+            }
+        ),
+        (
+            'ATTACK BONUSES', {
+                'fields': [
+                    ('melee_bonus', 'ranged_bonus', 'magic_bonus')
+                ]
+            }
+        ),
+        (
+            'INVENTORY', {
+                'fields': [
+                    ('copper', 'silver', 'gold', 'platinum'),
+                    'armor',
+                    'weapons',
+                    'gear'
+                ]
+            }
+        )
+    ]
