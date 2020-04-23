@@ -21,6 +21,7 @@ class RaceAdmin(admin.ModelAdmin):
 @admin.register(Weapon)
 class WeaponAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', 'cost', 'damage', 'range')
+    list_filter = ('type',)
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ['name']
 
@@ -28,6 +29,7 @@ class WeaponAdmin(admin.ModelAdmin):
 @admin.register(Armor)
 class ArmorAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', 'cost', 'ac_bonus')
+    list_filter = ('type',)
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ['name']
 

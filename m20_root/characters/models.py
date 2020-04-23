@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 # Create your models here.
 
@@ -52,7 +53,7 @@ class Weapon(models.Model):
 
 class Armor(models.Model):
     class Meta:
-        ordering = ['name']
+        ordering = ['type', 'name']
         verbose_name_plural = 'Armor'
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
@@ -60,6 +61,7 @@ class Armor(models.Model):
         ('L', 'Light'),
         ('M', 'Medium'),
         ('H', 'Heavy'),
+        ('S', 'Shield'),
     )
     type = models.CharField(max_length=10, choices=ARMOR_TYPE)
     cost = models.CharField(max_length=10, blank=False, default='-')
@@ -85,22 +87,22 @@ class Character(models.Model):
     class Meta:
         ordering = ['name']
     name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(default=uuid.uuid4)
     race = models.ForeignKey(Race, on_delete=models.PROTECT)
     character_class = models.ForeignKey(Class, on_delete=models.PROTECT)
     level = models.IntegerField(default=1)
     hit_points = models.IntegerField(default=1)
-    xp = models.IntegerField(default=0)
+    xp = models.IntegerField('XP', default=0)
     str = models.IntegerField('STR', default=10)
     dex = models.IntegerField('DEX', default=10)
     mind = models.IntegerField('MIND', default=10)
     phys = models.IntegerField('phys', default=0)
-    sub = models.IntegerField('sub', default=0)
-    know = models.IntegerField('know', default=0)
-    com = models.IntegerField('com', default=0)
-    melee_bonus = models.IntegerField('Melee Attack Bonus', default=0)
-    ranged_bonus = models.IntegerField('Ranged Attack Bonus', default=0)
-    magic_bonus = models.IntegerField('Magic Attack Bonus', default=0)
+    sub = models.IntegerField(default=0)
+    know = models.IntegerField(default=0)
+    com = models.IntegerField(default=0)
+    melee_bonus = models.IntegerField('Melee attack bonus', default=0)
+    ranged_bonus = models.IntegerField('Ranged attack bonus', default=0)
+    magic_bonus = models.IntegerField('Magic attack bonus', default=0)
     armor = models.ManyToManyField(Armor, blank=True)
     armor_class = models.IntegerField(default=10)
     weapons = models.ManyToManyField(Weapon, blank=True)
