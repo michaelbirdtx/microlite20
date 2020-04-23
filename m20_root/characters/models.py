@@ -9,7 +9,15 @@ class Class(models.Model):
         ordering = ['name']
         verbose_name_plural = 'Classes'
     name = models.CharField(max_length=20)
-    description = models.TextField(blank=True)
+    abilities = models.TextField(blank=True)
+    phys_bonus = models.IntegerField(default=0)
+    sub_bonus = models.IntegerField(default=0)
+    know_bonus = models.IntegerField(default=0)
+    com_bonus = models.IntegerField(default=0)
+    light_armor = models.BooleanField(default=False)
+    medium_armor = models.BooleanField(default=False)
+    heavy_armor = models.BooleanField(default=False)
+    shields = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -19,8 +27,8 @@ class Race(models.Model):
     class Meta:
         ordering = ['name']
     name = models.CharField(max_length=20)
-    description = models.TextField(blank=True)
-    skill_bonus = models.IntegerField('Skill Bonus', default=0)
+    abilities = models.TextField(blank=True)
+    skill_roll_bonus = models.IntegerField('Skill Roll Bonus', default=0)
     str_bonus = models.IntegerField('STR Bonus', default=0)
     dex_bonus = models.IntegerField('DEX Bonus', default=0)
     mind_bonus = models.IntegerField('MIND Bonus', default=0)

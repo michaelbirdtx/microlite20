@@ -6,13 +6,13 @@ from .models import Class, Race, Weapon, Armor, Gear, Clothing, Character
 
 @admin.register(Class)
 class ClassAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description')
+    list_display = ('name', 'abilities')
     search_fields = ['name']
 
 
 @admin.register(Race)
 class RaceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description')
+    list_display = ('name', 'abilities')
     search_fields = ['name']
 
 
