@@ -9,7 +9,6 @@ class Class(models.Model):
         ordering = ['name']
         verbose_name_plural = 'Classes'
     name = models.CharField(max_length=20)
-    slug = models.SlugField(max_length=20)
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -20,7 +19,6 @@ class Race(models.Model):
     class Meta:
         ordering = ['name']
     name = models.CharField(max_length=20)
-    slug = models.SlugField(max_length=20)
     description = models.TextField(blank=True)
     skill_bonus = models.IntegerField('Skill Bonus', default=0)
     str_bonus = models.IntegerField('STR Bonus', default=0)
@@ -33,9 +31,8 @@ class Race(models.Model):
 
 class Weapon(models.Model):
     class Meta:
-        ordering = ['name']
+        ordering = ['type', 'name']
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
     WEAPON_TYPE = (
         ('L', 'Light'),
         ('1H', 'One-Handed'),
@@ -56,7 +53,6 @@ class Armor(models.Model):
         ordering = ['type', 'name']
         verbose_name_plural = 'Armor'
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
     ARMOR_TYPE = (
         ('L', 'Light'),
         ('M', 'Medium'),
@@ -76,7 +72,17 @@ class Gear(models.Model):
         ordering = ['name']
         verbose_name_plural = 'Gear'
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
+    cost = models.CharField(max_length=10, blank=False, default='-')
+
+    def __str__(self):
+        return self.name
+
+
+class Clothing(models.Model):
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = 'Clothing'
+    name = models.CharField(max_length=50)
     cost = models.CharField(max_length=10, blank=False, default='-')
 
     def __str__(self):
@@ -107,6 +113,8 @@ class Character(models.Model):
     armor_class = models.IntegerField(default=10)
     weapons = models.ManyToManyField(Weapon, blank=True)
     gear = models.ManyToManyField(Gear, blank=True)
+    clothing = models.ForeignKey(
+        Clothing, blank=True, on_delete=models.PROTECT)
     copper = models.IntegerField(default=0)
     silver = models.IntegerField(default=0)
     gold = models.IntegerField(default=0)

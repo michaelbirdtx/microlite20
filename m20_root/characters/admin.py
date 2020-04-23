@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Class, Race, Weapon, Armor, Gear, Character
+from .models import Class, Race, Weapon, Armor, Gear, Clothing, Character
 
 # Register your models here.
 
@@ -7,14 +7,12 @@ from .models import Class, Race, Weapon, Armor, Gear, Character
 @admin.register(Class)
 class ClassAdmin(admin.ModelAdmin):
     list_display = ('name', 'description')
-    prepopulated_fields = {'slug': ('name',)}
     search_fields = ['name']
 
 
 @admin.register(Race)
 class RaceAdmin(admin.ModelAdmin):
     list_display = ('name', 'description')
-    prepopulated_fields = {'slug': ('name',)}
     search_fields = ['name']
 
 
@@ -22,7 +20,6 @@ class RaceAdmin(admin.ModelAdmin):
 class WeaponAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', 'cost', 'damage', 'range')
     list_filter = ('type',)
-    prepopulated_fields = {'slug': ('name',)}
     search_fields = ['name']
 
 
@@ -30,14 +27,18 @@ class WeaponAdmin(admin.ModelAdmin):
 class ArmorAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', 'cost', 'ac_bonus')
     list_filter = ('type',)
-    prepopulated_fields = {'slug': ('name',)}
     search_fields = ['name']
 
 
 @admin.register(Gear)
 class GearAdmin(admin.ModelAdmin):
     list_display = ('name', 'cost')
-    prepopulated_fields = {'slug': ('name',)}
+    search_fields = ['name']
+
+
+@admin.register(Clothing)
+class ClothingAdmin(admin.ModelAdmin):
+    list_display = ('name', 'cost')
     search_fields = ['name']
 
 
@@ -45,7 +46,8 @@ class GearAdmin(admin.ModelAdmin):
 class CharacterAdmin(admin.ModelAdmin):
     filter_horizontal = ('armor', 'weapons', 'gear')
     list_display = ('name', 'race', 'character_class')
-    prepopulated_fields = {'slug': ('name',)}
+    list_filter = ('character_class', 'race')
+    save_as = True
     search_fields = ['name']
 
     fieldsets = [
@@ -86,6 +88,7 @@ class CharacterAdmin(admin.ModelAdmin):
             'INVENTORY', {
                 'fields': [
                     ('copper', 'silver', 'gold', 'platinum'),
+                    'clothing',
                     'armor',
                     'weapons',
                     'gear'
