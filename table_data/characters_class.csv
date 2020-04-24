@@ -1,0 +1,5 @@
+"id","name","abilities","com_bonus","know_bonus","phys_bonus","sub_bonus","heavy_armor","light_armor","medium_armor","shields"
+1,"Fighter","Can wear any kind of armor and use shields; +3 bonus to Physical skill; +1 to all attack and damage rolls (increases by +1 at 5th level and every five levels thereafter).",0,0,3,0,TRUE,TRUE,TRUE,TRUE
+3,"Rogue","Can use light armor. +3 bonus to Subterfuge. Sneak (usually sub+DEX, but depends on situation) up on a foe to add Subterfuge skill rank to first attack damage.",0,0,0,3,FALSE,TRUE,FALSE,FALSE
+4,"Cleric","Can wear light or medium armor; casts divine spells ; +3 bonus to Communication; can Turn Undead with a successful Magic Attack (DC is the current Hit Points of the target; if the DC is exceeded by 10, the target is destroyed; can be used 2 + Level + MIND bonus times per day).",3,0,0,0,FALSE,TRUE,TRUE,FALSE
+5,"Mage","Cannot wear armor; casts arcane spells; +3 bonus to Knowledge.",0,3,0,0,FALSE,FALSE,FALSE,FALSE

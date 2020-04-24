@@ -1,6 +1,20 @@
 from django.db import models
 import uuid
 
+WEAPON_TYPE = (
+    ('L', 'Light'),
+    ('1H', 'One-Handed'),
+    ('2H', 'Two-Handed'),
+    ('R', 'Ranged'),
+)
+
+ARMOR_TYPE = (
+    ('L', 'Light'),
+    ('M', 'Medium'),
+    ('H', 'Heavy'),
+    ('S', 'Shield'),
+)
+
 # Create your models here.
 
 
@@ -41,12 +55,6 @@ class Weapon(models.Model):
     class Meta:
         ordering = ['type', 'name']
     name = models.CharField(max_length=50)
-    WEAPON_TYPE = (
-        ('L', 'Light'),
-        ('1H', 'One-Handed'),
-        ('2H', 'Two-Handed'),
-        ('R', 'Ranged'),
-    )
     type = models.CharField(max_length=10, choices=WEAPON_TYPE)
     cost = models.CharField(max_length=10, blank=False, default='-')
     damage = models.CharField(max_length=10, blank=False, default='-')
@@ -61,12 +69,6 @@ class Armor(models.Model):
         ordering = ['type', 'name']
         verbose_name_plural = 'Armor'
     name = models.CharField(max_length=50)
-    ARMOR_TYPE = (
-        ('L', 'Light'),
-        ('M', 'Medium'),
-        ('H', 'Heavy'),
-        ('S', 'Shield'),
-    )
     type = models.CharField(max_length=10, choices=ARMOR_TYPE)
     cost = models.CharField(max_length=10, blank=False, default='-')
     ac_bonus = models.IntegerField('AC Bonus', default=1)

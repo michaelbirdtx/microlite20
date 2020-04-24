@@ -1,0 +1,5 @@
+"id","name","str_bonus","dex_bonus","mind_bonus","skill_roll_bonus","abilities"
+3,"Dwarf",2,0,0,0,"+2 to Strength."
+1,"Elf",0,0,2,0,"+2 to Mind."
+4,"Halfling",0,2,0,0,"+2 to Dexterity."
+2,"Human",0,0,0,1,"+1 to all Skill Rolls."
