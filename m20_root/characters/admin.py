@@ -57,7 +57,7 @@ class CharacterAdmin(admin.ModelAdmin):
                     'name',
                     ('race', 'character_class'),
                     ('level', 'xp'),
-                    ('armor_class', 'hit_points'),
+                    ('armor_class', 'hit_points', 'hit_points_max'),
                     'slug',
                     'notes'
                 ]
@@ -74,13 +74,6 @@ class CharacterAdmin(admin.ModelAdmin):
             'SKILLS', {
                 'fields': [
                     ('phys', 'sub', 'know', 'com')
-                ]
-            }
-        ),
-        (
-            'ATTACK BONUSES', {
-                'fields': [
-                    ('melee_bonus', 'ranged_bonus', 'magic_bonus')
                 ]
             }
         ),

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Microlite 20 Character Sheet</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container my-3">
+    <div class="row bg-dark text-white pt-2">
+        <div class="col">
+            <h4 class="text-uppercase">Microlite 20 Character Sheet</h4>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12 col-md-6">
+            <div class="row">
+                <div class="col-3 font-weight-bold">
+                    Name:
+                </div>
+                <div class="col">
+                    {{ character.name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 font-weight-bold">
+                    Race:
+                </div>
+                <div class="col">
+                    {{ character.race }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 font-weight-bold">
+                    Class:
+                </div>
+                <div class="col">
+                    {{ character.character_class }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="row">
+                <div class="col-3 col-md-4 font-weight-bold">
+                    Level:
+                </div>
+                <div class="col-2">
+                    {{ character.level }}
+                </div>
+                <div class="col-2 font-weight-bold">
+                    XP:
+                </div>
+                <div class="col-1">
+                    {{ character.xp }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 col-md-4 font-weight-bold">
+                    HP:
+                </div>
+                <div class="col-2">
+                    {{ character.hit_points }}
+                </div>
+                <div class="col-2 font-weight-bold">
+                    Max:
+                </div>
+                <div class="col-1">
+                    {{ character.hit_points_max }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 col-md-4 font-weight-bold">
+                    AC:
+                </div>
+                <div class="col-2">
+                    {{ character.armor_class }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{ character.character_class.abilities }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="row my-2">
+                <div class="col bg-dark text-white font-weight-bold text-uppercase">
+                    Stats (Bonus)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold">
+                    STR:
+                </div>
+                <div class="col-1">
+                    {{ character.str }}
+                </div>
+                <div class="col">
+                    ({{character.str_bonus|stringformat:"+i" }})
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold">
+                    DEX:
+                </div>
+                <div class="col-1">
+                    {{ character.dex }}
+                </div>
+                <div class="col">
+                    ({{character.dex_bonus|stringformat:"+i" }})
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold">
+                    MIND:
+                </div>
+                <div class="col-1">
+                    {{ character.mind }}
+                </div>
+                <div class="col">
+                    ({{character.mind_bonus|stringformat:"+i" }})
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="row my-2">
+                <div class="col bg-dark text-white font-weight-bold text-uppercase">
+                    Skill Bonus
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold">
+                    phys:
+                </div>
+                <div class="col">
+                    {{ character.phys|stringformat:"+i" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold">
+                    sub:
+                </div>
+                <div class="col">
+                    {{ character.sub|stringformat:"+i" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold">
+                    know:
+                </div>
+                <div class="col">
+                    {{ character.know|stringformat:"+i" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold">
+                    com:
+                </div>
+                <div class="col">
+                    {{ character.com|stringformat:"+i" }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="row my-2">
+                <div class="col bg-dark text-white font-weight-bold text-uppercase">
+                    Attack Bonus
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold">
+                    Melee:
+                </div>
+                <div class="col">
+                    {{ character.melee_bonus|stringformat:"+i" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold">
+                    Ranged:
+                </div>
+                <div class="col">
+                    {{ character.ranged_bonus|stringformat:"+i" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 font-weight-bold">
+                    Magic:
+                </div>
+                <div class="col">
+                    {{ character.magic_bonus|stringformat:"+i" }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="row my-2">
+                <div class="col bg-dark text-white font-weight-bold text-uppercase">
+                    Weapons
+                </div>
+            </div>
+            {% for weapon in character.weapons.all %}
+            <div class="row">
+                <div class="col">
+                    <span class="font-weight-bold">{{ weapon.name }}</span>
+                    (dmg: {{ weapon.damage }}, range: {{ weapon.range }})
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="row my-2">
+                <div class="col bg-dark text-white font-weight-bold text-uppercase">
+                    Armor
+                </div>
+            </div>
+            {% for armor in character.armor.all %}
+            <div class="row">
+                <div class="col">
+                    <span class="font-weight-bold">{{ armor.name }}</span>
+                    (AC bonus: {{ armor.ac_bonus }})
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col bg-dark text-white font-weight-bold text-uppercase">
+            Inventory
+        </div>
+    </div>
+    <div class="row">
+        {% for item in character.gear.all %}
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+            {{ item.name }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row mt-2">
+        <div class="col-3 col-md-2 col-lg-1 font-weight-bold">
+            Clothing:
+        </div>
+        <div class="col-9 col-md-4 col-lg-3 col-xl-5">
+            {{ character.clothing }}
+        </div>
+        <div class="col-3 col-md-2 col-lg-2 font-weight-bold">
+            Currency:
+        </div>
+        <div class="col-9 col-md-4 col-lg-4">
+            {{ character.platinum }}pp,
+            {{ character.gold }}gp,
+            {{ character.silver }}sp,
+            {{ character.copper }}cp
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col bg-dark text-white font-weight-bold text-uppercase">
+            Notes
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {{ character.notes|linebreaks }}
+        </div>
+    </div>
+</body>
+</html>

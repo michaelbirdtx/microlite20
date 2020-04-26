@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+import math
 
 WEAPON_TYPE = (
     ('L', 'Light'),
@@ -53,7 +54,7 @@ class Race(models.Model):
 
 class Weapon(models.Model):
     class Meta:
-        ordering = ['type', 'name']
+        ordering = ['name']
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=10, choices=WEAPON_TYPE)
     cost = models.CharField(max_length=10, blank=False, default='-')
@@ -66,7 +67,7 @@ class Weapon(models.Model):
 
 class Armor(models.Model):
     class Meta:
-        ordering = ['type', 'name']
+        ordering = ['name']
         verbose_name_plural = 'Armor'
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=10, choices=ARMOR_TYPE)
@@ -108,6 +109,7 @@ class Character(models.Model):
     character_class = models.ForeignKey(Class, on_delete=models.PROTECT)
     level = models.IntegerField(default=1)
     hit_points = models.IntegerField(default=1)
+    hit_points_max = models.IntegerField('Max HP', default=1)
     xp = models.IntegerField('XP', default=0)
     str = models.IntegerField('STR', default=10)
     dex = models.IntegerField('DEX', default=10)
@@ -116,20 +118,35 @@ class Character(models.Model):
     sub = models.IntegerField(default=0)
     know = models.IntegerField(default=0)
     com = models.IntegerField(default=0)
-    melee_bonus = models.IntegerField(default=0)
-    ranged_bonus = models.IntegerField(default=0)
-    magic_bonus = models.IntegerField(default=0)
     armor = models.ManyToManyField(Armor, blank=True)
     armor_class = models.IntegerField(default=10)
     weapons = models.ManyToManyField(Weapon, blank=True)
     gear = models.ManyToManyField(Gear, blank=True)
     clothing = models.ForeignKey(
-        Clothing, blank=True, on_delete=models.PROTECT)
+        Clothing, blank=True, null=True, on_delete=models.PROTECT)
     copper = models.IntegerField(default=0)
     silver = models.IntegerField(default=0)
     gold = models.IntegerField(default=0)
     platinum = models.IntegerField(default=0)
     notes = models.TextField(blank=True)
+
+    def str_bonus(self):
+        return math.floor((self.str - 10)/2)
+
+    def dex_bonus(self):
+        return math.floor((self.dex - 10)/2)
+
+    def mind_bonus(self):
+        return math.floor((self.mind - 10)/2)
+
+    def melee_bonus(self):
+        return self.level + math.floor((self.str - 10)/2)
+
+    def ranged_bonus(self):
+        return self.level + math.floor((self.dex - 10)/2)
+
+    def magic_bonus(self):
+        return self.level + math.floor((self.mind - 10)/2)
 
     def __str__(self):
         return self.name
