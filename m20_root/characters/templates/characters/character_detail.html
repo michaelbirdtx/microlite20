@@ -90,7 +90,7 @@
     </div>
     <div class="row">
         <div class="col-12 col-md-4">
-            <div class="row my-2">
+            <div class="row my-3">
                 <div class="col bg-dark text-white font-weight-bold text-uppercase">
                     Stats (Bonus)
                 </div>
@@ -130,7 +130,7 @@
             </div>
         </div>
         <div class="col-12 col-md-4">
-            <div class="row my-2">
+            <div class="row my-3">
                 <div class="col bg-dark text-white font-weight-bold text-uppercase">
                     Skill Bonus
                 </div>
@@ -169,7 +169,7 @@
             </div>
         </div>
         <div class="col-12 col-md-4">
-            <div class="row my-2">
+            <div class="row my-3">
                 <div class="col bg-dark text-white font-weight-bold text-uppercase">
                     Attack Bonus
                 </div>
@@ -202,7 +202,7 @@
     </div>
     <div class="row">
         <div class="col-12 col-md-6">
-            <div class="row my-2">
+            <div class="row my-3">
                 <div class="col bg-dark text-white font-weight-bold text-uppercase">
                     Weapons
                 </div>
@@ -217,7 +217,7 @@
             {% endfor %}
         </div>
         <div class="col-12 col-md-6">
-            <div class="row my-2">
+            <div class="row my-3">
                 <div class="col bg-dark text-white font-weight-bold text-uppercase">
                     Armor
                 </div>
@@ -232,43 +232,49 @@
             {% endfor %}
         </div>
     </div>
-    <div class="row my-2">
-        <div class="col bg-dark text-white font-weight-bold text-uppercase">
-            Inventory
-        </div>
-    </div>
     <div class="row">
-        {% for item in character.gear.all %}
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            {{ item.name }}
+        <div class="col-12 col-md-6">
+            <div class="row my-3">
+                <div class="col bg-dark text-white font-weight-bold text-uppercase">
+                    Inventory
+                </div>
+            </div>
+            <div class="row">
+                {% for item in character.gear.all %}
+                <div class="col-12 col-lg-6">
+                    {{ item.name }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="row mt-2">
+                <div class="col-4 font-weight-bold">
+                    Clothing:
+                </div>
+                <div class="col-8">
+                    {{ character.clothing }}
+                </div>
+                <div class="col-4 font-weight-bold">
+                    Currency:
+                </div>
+                <div class="col-8">
+                    {{ character.platinum }}pp,
+                    {{ character.gold }}gp,
+                    {{ character.silver }}sp,
+                    {{ character.copper }}cp
+                </div>
+            </div>
         </div>
-        {% endfor %}
-    </div>
-    <div class="row mt-2">
-        <div class="col-3 col-md-2 col-lg-1 font-weight-bold">
-            Clothing:
-        </div>
-        <div class="col-9 col-md-4 col-lg-3 col-xl-5">
-            {{ character.clothing }}
-        </div>
-        <div class="col-3 col-md-2 col-lg-2 font-weight-bold">
-            Currency:
-        </div>
-        <div class="col-9 col-md-4 col-lg-4">
-            {{ character.platinum }}pp,
-            {{ character.gold }}gp,
-            {{ character.silver }}sp,
-            {{ character.copper }}cp
-        </div>
-    </div>
-    <div class="row my-2">
-        <div class="col bg-dark text-white font-weight-bold text-uppercase">
-            Notes
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            {{ character.notes|linebreaks }}
+        <div class="col-12 col-md-6">
+            <div class="row my-3">
+                <div class="col bg-dark text-white font-weight-bold text-uppercase">
+                    Notes
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    {{ character.notes|linebreaks }}
+                </div>
+            </div>
         </div>
     </div>
 </body>
