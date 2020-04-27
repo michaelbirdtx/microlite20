@@ -193,7 +193,7 @@ class Character(models.Model):
 
     @property
     def magic_bonus(self):
-        return self.level + (self.mind - 10) / 2
+        return self.level + int((self.mind - 10) / 2)
 
     def get_absolute_url(self):
         return "/characters/%s" % self.slug
