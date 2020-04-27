@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 import uuid
 import math
 
@@ -114,14 +115,10 @@ class Character(models.Model):
     str = models.IntegerField('STR', default=10)
     dex = models.IntegerField('DEX', default=10)
     mind = models.IntegerField('MIND', default=10)
-    phys = models.IntegerField('phys', default=0)
-    sub = models.IntegerField(default=0)
-    know = models.IntegerField(default=0)
-    com = models.IntegerField(default=0)
     armor = models.ManyToManyField(Armor, blank=True)
-    armor_class = models.IntegerField(default=10)
     weapons = models.ManyToManyField(Weapon, blank=True)
-    gear = models.ManyToManyField(Gear, blank=True)
+    gear = models.ManyToManyField(
+        Gear, blank=True, through='CharacterGear')
     clothing = models.ForeignKey(
         Clothing, blank=True, null=True, on_delete=models.PROTECT)
     copper = models.IntegerField(default=0)
@@ -130,23 +127,64 @@ class Character(models.Model):
     platinum = models.IntegerField(default=0)
     notes = models.TextField(blank=True)
 
+    @property
+    def armor_class(self):
+        return (
+            (10 + math.floor((self.dex - 10)/2)) +
+            self.armor.all().aggregate(Sum('ac_bonus')).get('ac_bonus__sum')
+        )
+
+    @property
     def str_bonus(self):
         return math.floor((self.str - 10)/2)
 
+    @property
     def dex_bonus(self):
         return math.floor((self.dex - 10)/2)
 
+    @property
     def mind_bonus(self):
         return math.floor((self.mind - 10)/2)
 
+    @property
+    def phys(self):
+        return self.level + self.character_class.phys_bonus
+
+    @property
+    def sub(self):
+        return self.level + self.character_class.sub_bonus
+
+    @property
+    def know(self):
+        return self.level + self.character_class.know_bonus
+
+    @property
+    def com(self):
+        return self.level + self.character_class.com_bonus
+
+    @property
     def melee_bonus(self):
         return self.level + math.floor((self.str - 10)/2)
 
+    @property
     def ranged_bonus(self):
         return self.level + math.floor((self.dex - 10)/2)
 
+    @property
     def magic_bonus(self):
         return self.level + math.floor((self.mind - 10)/2)
 
     def __str__(self):
         return self.name
+
+
+class CharacterGear(models.Model):
+    class Meta:
+        verbose_name = 'Adventuring Gear'
+        verbose_name_plural = 'Adventuring Gear'
+    character = models.ForeignKey(Character, on_delete=models.CASCADE)
+    gear = models.ForeignKey(Gear, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.gear.name

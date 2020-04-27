@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Class, Race, Weapon, Armor, Gear, Clothing, Character
+from .models import (Class, Race, Weapon, Armor, Gear,
+                     Clothing, Character, CharacterGear)
 
 # Register your models here.
 
@@ -42,9 +43,19 @@ class ClothingAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+class CharacterGearInline(admin.TabularInline):
+    model = CharacterGear
+    autocomplete_fields = ['gear']
+    extra = 0
+    fields = ('gear', 'quantity')
+
+
 @admin.register(Character)
 class CharacterAdmin(admin.ModelAdmin):
     filter_horizontal = ('armor', 'weapons', 'gear')
+    inlines = [
+        CharacterGearInline
+    ]
     list_display = ('name', 'race', 'character_class')
     list_filter = ('character_class', 'race')
     save_as = True
@@ -57,7 +68,7 @@ class CharacterAdmin(admin.ModelAdmin):
                     'name',
                     ('race', 'character_class'),
                     ('level', 'xp'),
-                    ('armor_class', 'hit_points', 'hit_points_max'),
+                    ('hit_points', 'hit_points_max'),
                     'slug',
                     'notes'
                 ]
@@ -71,20 +82,12 @@ class CharacterAdmin(admin.ModelAdmin):
             }
         ),
         (
-            'SKILLS', {
-                'fields': [
-                    ('phys', 'sub', 'know', 'com')
-                ]
-            }
-        ),
-        (
             'INVENTORY', {
                 'fields': [
                     ('copper', 'silver', 'gold', 'platinum'),
                     'clothing',
                     'armor',
-                    'weapons',
-                    'gear'
+                    'weapons'
                 ]
             }
         )
