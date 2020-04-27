@@ -183,6 +183,7 @@ class Character(models.Model):
 
 class CharacterGear(models.Model):
     class Meta:
+        ordering = ['gear__name']
         verbose_name = 'Adventuring Gear'
         verbose_name_plural = 'Adventuring Gear'
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
