@@ -174,6 +174,9 @@ class Character(models.Model):
     def magic_bonus(self):
         return self.level + math.floor((self.mind - 10)/2)
 
+    def get_absolute_url(self):
+        return "/characters/%s" % self.slug
+
     def __str__(self):
         return self.name
 
