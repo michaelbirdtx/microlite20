@@ -26,6 +26,7 @@ class Class(models.Model):
         verbose_name_plural = 'Classes'
     name = models.CharField(max_length=20)
     abilities = models.TextField(blank=True)
+    attack_bonus = models.IntegerField(default=0)
     phys_bonus = models.IntegerField(default=0)
     sub_bonus = models.IntegerField(default=0)
     know_bonus = models.IntegerField(default=0)
@@ -136,43 +137,63 @@ class Character(models.Model):
 
     @property
     def str_bonus(self):
-        return math.floor((self.str - 10)/2)
+        return int((self.str - 10) / 2)
 
     @property
     def dex_bonus(self):
-        return math.floor((self.dex - 10)/2)
+        return int((self.dex - 10) / 2)
 
     @property
     def mind_bonus(self):
-        return math.floor((self.mind - 10)/2)
+        return int((self.mind - 10) / 2)
 
     @property
     def phys(self):
-        return self.level + self.character_class.phys_bonus
+        return (
+            int(self.level) +
+            int(self.character_class.phys_bonus) +
+            int(self.race.skill_roll_bonus))
 
     @property
     def sub(self):
-        return self.level + self.character_class.sub_bonus
+        return (
+            int(self.level) +
+            int(self.character_class.sub_bonus) +
+            int(self.race.skill_roll_bonus))
 
     @property
     def know(self):
-        return self.level + self.character_class.know_bonus
+        return (
+            int(self.level) +
+            int(self.character_class.know_bonus) +
+            int(self.race.skill_roll_bonus))
 
     @property
     def com(self):
-        return self.level + self.character_class.com_bonus
+        return (
+            int(self.level) +
+            int(self.character_class.com_bonus) +
+            int(self.race.skill_roll_bonus))
 
     @property
     def melee_bonus(self):
-        return self.level + math.floor((self.str - 10)/2)
+        return (
+            int(self.level) +
+            int(self.character_class.attack_bonus) +
+            int((self.character_class.attack_bonus * (self.level / 5))) +
+            int((self.str - 10) / 2))
 
     @property
     def ranged_bonus(self):
-        return self.level + math.floor((self.dex - 10)/2)
+        return (
+            self.level +
+            int(self.character_class.attack_bonus) +
+            int((self.character_class.attack_bonus * (self.level / 5))) +
+            int((self.dex - 10) / 2))
 
     @property
     def magic_bonus(self):
-        return self.level + math.floor((self.mind - 10)/2)
+        return self.level + (self.mind - 10) / 2
 
     def get_absolute_url(self):
         return "/characters/%s" % self.slug
