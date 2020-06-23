@@ -83,9 +83,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'microlite20',
-        'USER': 'postgres',
-        'PASSWORD': 'dJt452020',
-        'HOST': '192.168.1.201',
+        'USER': 'michael',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
