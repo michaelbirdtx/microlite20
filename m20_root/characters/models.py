@@ -130,52 +130,53 @@ class Character(models.Model):
 
     @property
     def armor_class(self):
-        return (
-            (10 + math.floor((self.dex - 10)/2)) +
-            self.armor.all().aggregate(Sum('ac_bonus')).get('ac_bonus__sum')
-        )
+        ac = (10 + math.floor((self.dex - 10)/2))
+        if self.armor.count() > 0:
+            ac += self.armor.all().aggregate(
+                Sum('ac_bonus')).get('ac_bonus__sum')
+        return ac
 
-    @property
+    @ property
     def str_bonus(self):
         return int((self.str - 10) / 2)
 
-    @property
+    @ property
     def dex_bonus(self):
         return int((self.dex - 10) / 2)
 
-    @property
+    @ property
     def mind_bonus(self):
         return int((self.mind - 10) / 2)
 
-    @property
+    @ property
     def phys(self):
         return (
             int(self.level) +
             int(self.character_class.phys_bonus) +
             int(self.race.skill_roll_bonus))
 
-    @property
+    @ property
     def sub(self):
         return (
             int(self.level) +
             int(self.character_class.sub_bonus) +
             int(self.race.skill_roll_bonus))
 
-    @property
+    @ property
     def know(self):
         return (
             int(self.level) +
             int(self.character_class.know_bonus) +
             int(self.race.skill_roll_bonus))
 
-    @property
+    @ property
     def com(self):
         return (
             int(self.level) +
             int(self.character_class.com_bonus) +
             int(self.race.skill_roll_bonus))
 
-    @property
+    @ property
     def melee_bonus(self):
         return (
             int(self.level) +
@@ -183,7 +184,7 @@ class Character(models.Model):
             int((self.character_class.attack_bonus * (self.level / 5))) +
             int((self.str - 10) / 2))
 
-    @property
+    @ property
     def ranged_bonus(self):
         return (
             self.level +
@@ -191,7 +192,7 @@ class Character(models.Model):
             int((self.character_class.attack_bonus * (self.level / 5))) +
             int((self.dex - 10) / 2))
 
-    @property
+    @ property
     def magic_bonus(self):
         return self.level + int((self.mind - 10) / 2)
 
