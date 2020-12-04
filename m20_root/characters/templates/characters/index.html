@@ -1,0 +1,38 @@
+{% extends "characters/base.html" %}
+{% block pagetitle %}Microlite 20 Character Sheet{% endblock %}
+{% block content %}
+<div class="container my-3">
+    <div class="row bg-dark text-white pt-2">
+        <div class="col">
+            <h4 class="text-uppercase">Microlite 20 Characters</h4>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Character Name</th>
+                    <th>Class</th>
+                    <th>Race</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for character in character_list %}
+                <tr>
+                    <td>
+                        <a href="characters/{{ character.slug }}">
+                        {{ character.name }}</a>
+                    </td>
+                    <td>
+                        {{ character.character_class }}
+                    </td>
+                    <td>
+                        {{ character.race }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

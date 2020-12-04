@@ -13,3 +13,8 @@ def index(request):
 class CharacterDetailView(generic.DetailView):
     model = Character
     template_name = 'characters/character_detail.html'
+
+
+class CharacterListView(generic.ListView):
+    model = Character
+    template_name = 'characters/index.html'
