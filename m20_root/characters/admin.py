@@ -1,8 +1,14 @@
 from django.contrib import admin
-from .models import (Class, Race, Weapon, Armor, Gear,
+from .models import (Player, Class, Race, Weapon, Armor, Gear,
                      Clothing, Character, CharacterGear)
 
 # Register your models here.
+
+
+@admin.register(Player)
+class PlayerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'is_active')
+    search_fields = ('name', 'email')
 
 
 @admin.register(Class)
@@ -70,6 +76,7 @@ class CharacterAdmin(admin.ModelAdmin):
                     ('level', 'xp'),
                     ('hit_points', 'hit_points_max'),
                     'slug',
+                    'player',
                     'notes'
                 ]
             }

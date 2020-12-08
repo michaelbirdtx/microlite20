@@ -20,6 +20,20 @@ ARMOR_TYPE = (
 # Create your models here.
 
 
+class Player(models.Model):
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Player'
+        verbose_name_plural = 'Players'
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254, unique=True)
+    is_active = models.BooleanField(default=True)
+    slug = models.SlugField(default=uuid.uuid4)
+
+    def __str__(self):
+        return self.name
+
+
 class Class(models.Model):
     class Meta:
         ordering = ['name']
@@ -107,6 +121,8 @@ class Character(models.Model):
         ordering = ['name']
     name = models.CharField(max_length=100)
     slug = models.SlugField(default=uuid.uuid4)
+    player = models.ForeignKey(
+        Player, blank=True, null=True, on_delete=models.CASCADE)
     race = models.ForeignKey(Race, on_delete=models.PROTECT)
     character_class = models.ForeignKey(Class, on_delete=models.PROTECT)
     level = models.IntegerField(default=1)
