@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'm20_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'microlite20',
-        'USER': 'michael',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': 'm20',
+        'USER': 'm20',
+        'PASSWORD': 'BPNEH3tzXogbpDkDRTAC',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
