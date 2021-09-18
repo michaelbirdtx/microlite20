@@ -97,7 +97,8 @@ class Armor(models.Model):
 class Gear(models.Model):
     class Meta:
         ordering = ['name']
-        verbose_name_plural = 'Gear'
+        verbose_name = 'Item'
+        verbose_name_plural = 'Item'
     name = models.CharField(max_length=50)
     cost = models.CharField(max_length=10, blank=False, default='-')
 
@@ -126,8 +127,7 @@ class Character(models.Model):
     race = models.ForeignKey(Race, on_delete=models.PROTECT)
     character_class = models.ForeignKey(Class, on_delete=models.PROTECT)
     level = models.IntegerField(default=1)
-    hit_points = models.IntegerField(default=1)
-    hit_points_max = models.IntegerField('Max HP', default=1)
+    hit_points = models.IntegerField('Hit Points', default=1)
     xp = models.IntegerField('XP', default=0)
     str = models.IntegerField('STR', default=10)
     dex = models.IntegerField('DEX', default=10)
@@ -222,10 +222,11 @@ class Character(models.Model):
 class CharacterGear(models.Model):
     class Meta:
         ordering = ['gear__name']
-        verbose_name = 'Adventuring Gear'
-        verbose_name_plural = 'Adventuring Gear'
+        verbose_name = 'Item'
+        verbose_name_plural = 'Items'
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
-    gear = models.ForeignKey(Gear, on_delete=models.CASCADE)
+    gear = models.ForeignKey(
+        Gear, verbose_name='Item', on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
     def __str__(self):

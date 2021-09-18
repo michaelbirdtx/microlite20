@@ -2,7 +2,11 @@ from django.contrib import admin
 from .models import (Player, Class, Race, Weapon, Armor, Gear,
                      Clothing, Character, CharacterGear)
 
-# Register your models here.
+admin.site.site_title = 'Microlite 20'
+admin.site.site_header = 'Microlite 20'
+admin.site.index_title = 'Administration'
+
+# Models
 
 
 @admin.register(Player)
@@ -54,6 +58,8 @@ class CharacterGearInline(admin.TabularInline):
     autocomplete_fields = ['gear']
     extra = 0
     fields = ('gear', 'quantity')
+    verbose_name = 'Item'
+    verbose_name_plural = 'Equipment'
 
 
 @admin.register(Character)
@@ -74,7 +80,7 @@ class CharacterAdmin(admin.ModelAdmin):
                     'name',
                     ('race', 'character_class'),
                     ('level', 'xp'),
-                    ('hit_points', 'hit_points_max'),
+                    'hit_points',
                     'slug',
                     'player',
                     'notes'
