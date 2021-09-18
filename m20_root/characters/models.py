@@ -125,7 +125,8 @@ class Character(models.Model):
     player = models.ForeignKey(
         Player, blank=True, null=True, on_delete=models.CASCADE)
     race = models.ForeignKey(Race, on_delete=models.PROTECT)
-    character_class = models.ForeignKey(Class, on_delete=models.PROTECT)
+    character_class = models.ForeignKey(
+        Class, verbose_name='Class', on_delete=models.PROTECT)
     level = models.IntegerField(default=1)
     hit_points = models.IntegerField('Hit Points', default=1)
     xp = models.IntegerField('XP', default=0)

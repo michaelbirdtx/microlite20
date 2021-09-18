@@ -59,7 +59,7 @@ class CharacterGearInline(admin.TabularInline):
     extra = 0
     fields = ('gear', 'quantity')
     verbose_name = 'Item'
-    verbose_name_plural = 'Equipment'
+    verbose_name_plural = 'Adventuring Gear'
 
 
 @admin.register(Character)
