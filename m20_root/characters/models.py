@@ -106,6 +106,20 @@ class Gear(models.Model):
         return self.name
 
 
+class GearPack(models.Model):
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Gear Pack'
+        verbose_name_plural = 'Gear Packs'
+    name = models.CharField(max_length=50)
+    cost = models.CharField(max_length=10, blank=False, default='-')
+    gear = models.ManyToManyField(
+        Gear, blank=True, through='GearInPack')
+
+    def __str__(self):
+        return self.name
+
+
 class Clothing(models.Model):
     class Meta:
         ordering = ['name']
@@ -226,6 +240,20 @@ class CharacterGear(models.Model):
         verbose_name = 'Item'
         verbose_name_plural = 'Items'
     character = models.ForeignKey(Character, on_delete=models.CASCADE)
+    gear = models.ForeignKey(
+        Gear, verbose_name='Item', on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.gear.name
+
+
+class GearInPack(models.Model):
+    class Meta:
+        ordering = ['gear__name']
+        verbose_name = 'Item'
+        verbose_name_plural = 'Items'
+    gearpack = models.ForeignKey(GearPack, on_delete=models.CASCADE)
     gear = models.ForeignKey(
         Gear, verbose_name='Item', on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)

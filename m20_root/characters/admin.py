@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import (Player, Class, Race, Weapon, Armor, Gear,
-                     Clothing, Character, CharacterGear)
+                     Clothing, Character, CharacterGear, GearPack,
+                     GearInPack)
 
 admin.site.site_title = 'Microlite 20'
 admin.site.site_header = 'Microlite 20'
@@ -45,6 +46,24 @@ class ArmorAdmin(admin.ModelAdmin):
 class GearAdmin(admin.ModelAdmin):
     list_display = ('name', 'cost')
     search_fields = ['name']
+
+
+class GearInPackInline(admin.TabularInline):
+    model = GearInPack
+    autocomplete_fields = ['gear']
+    extra = 0
+    fields = ('gear', 'quantity')
+    verbose_name = 'Item'
+    verbose_name_plural = 'Items'
+
+
+@admin.register(GearPack)
+class GearPackAdmin(admin.ModelAdmin):
+    list_display = ('name', 'cost')
+    search_fields = ['name']
+    inlines = [
+        GearInPackInline
+    ]
 
 
 @admin.register(Clothing)
